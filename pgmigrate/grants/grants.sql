@@ -1,0 +1,2 @@
+GRANT USAGE ON SCHEMA mp TO mp_client;
+GRANT ALL ON ALL TABLES IN SCHEMA mp TO mp_client;
