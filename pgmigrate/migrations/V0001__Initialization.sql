@@ -23,8 +23,8 @@ CREATE TABLE lobby_types (
 );
 
 INSERT INTO lobby_types (name) VALUES ('PUBLIC');
-INSERT INTO lobby_types (name) VALUES ('PRIVAT');
-INSERT INTO lobby_types (name) VALUES ('RATING');
+INSERT INTO lobby_types (name) VALUES ('PRIVATE');
+INSERT INTO lobby_types (name) VALUES ('RANKED');
 
 
 CREATE TABLE victory_types (
