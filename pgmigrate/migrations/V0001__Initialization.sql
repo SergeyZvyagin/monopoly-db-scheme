@@ -1,13 +1,15 @@
 CREATE TABLE users (
 		id serial NOT NULL,
-		nickname varchar(32) NOT NULL DEFAULT 'Player',
+		nickname varchar(16) NOT NULL DEFAULT 'Player',
 		vk_id int,
+		google_id int,
+		active_jwt_identifier varchar(32),
 		is_guest bool NOT NULL DEFAULT true,
 		rating int NOT NULL DEFAULT 0,
 		games_played int NOT NULL DEFAULT 0,
 		games_won int NOT NULL DEFAULT 0,
 		created_at timestamp NOT NULL DEFAULT LOCALTIMESTAMP,
-		last_action_at timestamp NOT NULL DEFAULT LOCALTIMESTAMP,
+		last_refresh_at timestamp NOT NULL DEFAULT LOCALTIMESTAMP,
 		---------------------------------------------------------
 		CONSTRAINT users__pkey PRIMARY KEY (id),
 		CONSTRAINT users__vk_id__unique UNIQUE (vk_id)
@@ -42,9 +44,9 @@ INSERT INTO victory_types (name) VALUES ('BOTH');
 
 CREATE TABLE lobbies (
 		id serial NOT NULL,
-		name varchar(32) NOT NULL,
+		name varchar(16) NOT NULL,
 		lobby_type int NOT NULL DEFAULT 1,
-		password varchar(32),
+		password varchar(16),
 		max_players smallint NOT NULL DEFAULT 6,
 		time_for_turn smallint NOT NULL DEFAULT 8,
 		victory_type int NOT NULL DEFAULT 1,
@@ -75,13 +77,12 @@ INSERT INTO player_states (name) VALUES ('IN GAME');
 
 
 CREATE TABLE players_in_lobbies (
-		id serial NOT NULL,
 		lobby_id int NOT NULL,
 		player_id int NOT NULL,
 		player_state int not NULL DEFAULT 1,
 		last_action_at timestamp NOT NULL DEFAULT LOCALTIMESTAMP,
 		---------------------------------------------------------
-		CONSTRAINT players_in_lobbies__pkey PRIMARY KEY (id),
+		CONSTRAINT players_in_lobbies__player_id__unique UNIQUE (player_id),
 		CONSTRAINT players_in_lobbies__lobby_id__fkey FOREIGN KEY (lobby_id) REFERENCES lobbies(id) ON DELETE CASCADE,
 		CONSTRAINT players_in_lobbies__player_id__fkey FOREIGN KEY (player_id) REFERENCES users(id) ON DELETE CASCADE,
 		CONSTRAINT players_in_lobbies__player_state__fkey FOREIGN KEY (player_state) REFERENCES player_states(id)
