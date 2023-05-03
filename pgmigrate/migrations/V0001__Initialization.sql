@@ -3,7 +3,6 @@ CREATE TABLE users (
 		nickname varchar(16) NOT NULL DEFAULT 'Player',
 		vk_id int,
 		google_id int,
-		active_jwt_identifier varchar(32),
 		is_guest bool NOT NULL DEFAULT true,
 		rating int NOT NULL DEFAULT 0,
 		games_played int NOT NULL DEFAULT 0,
