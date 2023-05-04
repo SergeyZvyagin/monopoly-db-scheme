@@ -43,7 +43,8 @@ INSERT INTO victory_types (name) VALUES ('BOTH');
 
 CREATE TABLE lobbies (
 		id serial NOT NULL,
-		name varchar(16) NOT NULL,
+		owner_id int not NULL,
+		name varchar(32) NOT NULL,
 		lobby_type int NOT NULL DEFAULT 1,
 		password varchar(16),
 		max_players smallint NOT NULL DEFAULT 6,
@@ -56,6 +57,7 @@ CREATE TABLE lobbies (
 		game_port int,
 		------------------------------------------
 		CONSTRAINT lobbies__pkey PRIMARY KEY (id),
+		CONSTRAINT lobbies__owner_id__fkey FOREIGN KEY (owner_id) REFERENCES users(id),
 		CONSTRAINT lobbies__lobby_type__fkey FOREIGN KEY (lobby_type) REFERENCES lobby_types(id),
 		CONSTRAINT lobbies__victory_type__fkey FOREIGN KEY (victory_type) REFERENCES victory_types(id)		
 );
