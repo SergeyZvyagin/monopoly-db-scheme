@@ -77,9 +77,9 @@ INSERT INTO player_states (name) VALUES ('LOST');
 INSERT INTO player_states (name) VALUES ('IN GAME');
 
 
-CREATE TABLE players_in_lobbies (
-		lobby_id int NOT NULL,
+CREATE TABLE players_in_lobbies (	
 		player_id int NOT NULL,
+		lobby_id int NOT NULL,
 		player_state int not NULL DEFAULT 1,
 		last_action_at timestamp NOT NULL DEFAULT LOCALTIMESTAMP,
 		---------------------------------------------------------
